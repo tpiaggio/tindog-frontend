@@ -84,7 +84,7 @@ export default function Profile() {
       <CardHeader>
         <CardTitle>Dog Profile</CardTitle>
         <CardDescription>
-          You can update your dog's profile in Tindog.
+          You can update your dog&apos;s profile in Tindog.
         </CardDescription>
       </CardHeader>
       <Form {...form}>

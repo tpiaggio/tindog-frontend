@@ -70,9 +70,9 @@ export default function ImageUpload() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle>Upload Your Dog's Image</CardTitle>
+        <CardTitle>Upload Your Dog&apos;s Image</CardTitle>
         <CardDescription>
-          We will analyze your dog's image before proceeding.
+          We will analyze your dog&apos;s image before proceeding.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">

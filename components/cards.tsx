@@ -234,7 +234,7 @@ const Cards = ({session}: {session: string}) => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="text-center mb-1">
-              You're the perfect match! 🐶 🦴
+              You&apos;re the perfect match! 🐶 🦴
             </DialogTitle>
             <DialogDescription className="text-center">
               {currentDog.name} and {matchedDog?.name} have liked each other,

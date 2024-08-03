@@ -79,7 +79,7 @@ export default function DogForm({userId}: {userId: string}) {
       <CardHeader>
         <CardTitle>Dog Onboarding</CardTitle>
         <CardDescription>
-          Fill out the form to create your dog's profile in Tindog.
+          Fill out the form to create your dog&apos;s profile in Tindog.
         </CardDescription>
       </CardHeader>
       <Form {...form}>

@@ -81,8 +81,8 @@ const Chats = ({session}: {session: string}) => {
         <div className="text-center">
           <h2 className="text-2xl font-bold">No chats found</h2>
           <p className="mt-2 text-muted-foreground">
-            It looks like you haven't matched with any dogs yet. Why don't you
-            try liking a new dog and see if they like you back?
+            It looks like you haven&apos;t matched with any dogs yet. Why
+            don&apos;t you try liking a new dog and see if they like you back?
           </p>
         </div>
         <Link

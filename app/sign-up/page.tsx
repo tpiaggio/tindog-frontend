@@ -21,7 +21,7 @@ const initialState = {
   message: "",
 };
 
-export function SignUpForm() {
+export default async function SignUpPage() {
   const [state, formAction] = useFormState(createUserWithEmail, initialState);
   const {pending} = useFormStatus();
 
@@ -78,13 +78,5 @@ export function SignUpForm() {
         </CardContent>
       </Card>
     </form>
-  );
-}
-
-export default function Page() {
-  return (
-    <div className="flex items-center justify-center h-screen">
-      <SignUpForm />
-    </div>
   );
 }
