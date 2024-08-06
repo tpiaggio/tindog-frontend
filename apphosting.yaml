@@ -1,3 +1,7 @@
+# Settings for Cloud Run
+runConfig:
+  maxInstances: 10
+
 # Environment variables and secrets
 env:
   - variable: NEXT_PUBLIC_API_KEY
