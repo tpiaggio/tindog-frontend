@@ -1,0 +1,22 @@
+# Environment variables and secrets
+env:
+  - variable: NEXT_PUBLIC_API_KEY
+    secret: FIREBASE_API_KEY
+
+  - variable: NEXT_PUBLIC_AUTH_DOMAIN
+    value: tindog-4edd4.firebaseapp.com
+
+  - variable: NEXT_PUBLIC_PROJECT_ID
+    value: tindog-4edd4
+
+  - variable: NEXT_PUBLIC_STORAGE_BUCKET
+    value: tindog-4edd4.appspot.com
+
+  - variable: NEXT_PUBLIC_MESSAGING_SENDER_ID
+    value: 945523259593
+
+  - variable: NEXT_PUBLIC_APP_ID
+    value: 1:945523259593:web:bd2d54d55f4e0b8745b518
+
+  - variable: NEXT_PUBLIC_MEASUREMENT_ID
+    value: G-1LTFY9PBWQ
