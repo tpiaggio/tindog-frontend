@@ -4,17 +4,17 @@ import {
   ROOT_ROUTE,
   SESSION_COOKIE_NAME,
   SIGN_UP_ROUTE,
+  CHAT_ROUTE,
+  PROFILE_ROUTE,
 } from "./constants";
-import {getCookie} from "cookies-next";
 
-const protectedRoutes = [ROOT_ROUTE];
+const protectedRoutes = [ROOT_ROUTE, CHAT_ROUTE, PROFILE_ROUTE];
 const unprotectedRoutes = [LOGIN_ROUTE, SIGN_UP_ROUTE];
 
 export default function middleware(request: NextRequest) {
   const session =
     request.cookies.get(SESSION_COOKIE_NAME)?.value ||
     request.headers.get(SESSION_COOKIE_NAME) ||
-    getCookie(SESSION_COOKIE_NAME) ||
     "";
 
   // Redirect to login if session is not set
