@@ -29,4 +29,4 @@ if (typeof window !== "undefined" && window.location.hostname === "localhost") {
   connectFunctionsEmulator(functions, "127.0.0.1", 5001);
 }
 
-export {auth, db, storage, functions};
+export {auth, db, storage, functions, firebaseConfig};
