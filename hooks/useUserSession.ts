@@ -14,7 +14,10 @@ export default function useUserSession(InitSession: string | null) {
   // Register the service worker that sends auth state back to server
   // The service worker is built with npm run build-service-worker
   useEffect(() => {
-    if ("serviceWorker" in navigator) {
+    if (
+      window.location.hostname !== "localhost" &&
+      "serviceWorker" in navigator
+    ) {
       const serializedFirebaseConfig = encodeURIComponent(
         JSON.stringify(firebaseConfig)
       );

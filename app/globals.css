@@ -81,3 +81,7 @@
 nextjs-portal {
   display: none;
 }
+
+.firebase-emulator-warning {
+  display: none;
+}

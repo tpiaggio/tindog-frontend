@@ -30,6 +30,14 @@ import {matchDogs} from "@/lib/firebase/functions";
 import {Loader2} from "lucide-react";
 import {SESSION_COOKIE_NAME} from "@/constants";
 import {getCookie} from "cookies-next";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
+import {db} from "@/lib/firebase/config";
 
 const Cards = ({session}: {session: string | undefined}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -49,13 +57,35 @@ const Cards = ({session}: {session: string | undefined}) => {
 
   useEffect(() => {
     if (!currentDog.id || !userSessionId) return;
-    getDogs(userSessionId, currentDog.seen).then((data) => {
-      if (data) {
-        setDogs(data);
-        setCurrentIndex(data.length - 1);
+    const q = query(
+      collection(db, "dogs"),
+      where("userId", "!=", userSessionId)
+    );
+    let loads = 0;
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const newDogs = [] as Dog[];
+      querySnapshot.forEach((doc) => {
+        const dog = {
+          id: doc.id,
+          ...doc.data(),
+        } as Dog;
+        newDogs.push(dog);
+      });
+      const unseenDogs = newDogs.filter(
+        (dog) => !currentDog.seen?.includes(dog.id)
+      );
+      if (unseenDogs.length > 0) {
+        loads++;
+        if (loads === 1) {
+          // First load
+          setCurrentIndex(unseenDogs.length - 1);
+        }
+        setDogs(unseenDogs);
       }
       setLoading(false);
     });
+
+    return () => unsubscribe();
   }, [currentDog]);
 
   const childRefs: any[] = useMemo(
@@ -80,9 +110,8 @@ const Cards = ({session}: {session: string | undefined}) => {
 
   // set last direction and decrease current index
   const swiped = async (direction: string, swipedDog: Dog, index: number) => {
-    console.log("swiped", direction, swipedDog.id);
+    // console.log("swiped", direction, swipedDog.id);
     if (direction === "right") {
-      debugger;
       const isMatch = swipedDog.likes.includes(currentDog.id!);
       if (isMatch) {
         setMatchLoading(true);
@@ -118,7 +147,7 @@ const Cards = ({session}: {session: string | undefined}) => {
   };
 
   const outOfFrame = (name: string, idx: number) => {
-    console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current);
+    // console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current);
     // handle the case in which go back is pressed before card goes outOfFrame
     currentIndexRef.current >= idx && childRefs[idx].current?.restoreCard();
   };
