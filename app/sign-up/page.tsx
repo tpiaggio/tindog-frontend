@@ -26,57 +26,59 @@ export default async function SignUpPage() {
   const {pending} = useFormStatus();
 
   return (
-    <form action={formAction}>
-      <Card className="mx-auto max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-2xl">Sign up</CardTitle>
-          <CardDescription>
-            Enter your details below to create a new account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
+    <div className="flex items-center justify-center h-screen">
+      <form onSubmit={() => alert("Please sign up with Google for this demo")}>
+        <Card className="mx-auto max-w-sm">
+          <CardHeader>
+            <CardTitle className="text-2xl">Sign up</CardTitle>
+            <CardDescription>
+              Enter your details below to create a new account
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                />
               </div>
-              <Input id="password" name="password" type="password" required />
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                </div>
+                <Input id="password" name="password" type="password" required />
+              </div>
+              <Button aria-disabled={pending} type="submit" className="w-full">
+                Sign up
+              </Button>
+              <GoogleButton type="button" variant="outline" className="w-full">
+                Sign up with Google
+              </GoogleButton>
             </div>
-            <Button aria-disabled={pending} type="submit" className="w-full">
-              Sign up
-            </Button>
-            <GoogleButton type="button" variant="outline" className="w-full">
-              Sign up with Google
-            </GoogleButton>
-          </div>
-          <div className="mt-4 text-center text-sm">
-            Already have an account?{" "}
-            <Link href="/login" className="underline">
-              Log in
-            </Link>
-          </div>
-          {state?.error && (
-            <p className="text-sm mt-4 text-center text-red-500">
-              {state.message}
-            </p>
-          )}
-          {!state?.error && state?.message && (
-            <p className="text-sm mt-4 text-center text-green-500">
-              {state.message}
-            </p>
-          )}
-        </CardContent>
-      </Card>
-    </form>
+            <div className="mt-4 text-center text-sm">
+              Already have an account?{" "}
+              <Link href="/login" className="underline">
+                Log in
+              </Link>
+            </div>
+            {state?.error && (
+              <p className="text-sm mt-4 text-center text-red-500">
+                {state.message}
+              </p>
+            )}
+            {!state?.error && state?.message && (
+              <p className="text-sm mt-4 text-center text-green-500">
+                {state.message}
+              </p>
+            )}
+          </CardContent>
+        </Card>
+      </form>
+    </div>
   );
 }

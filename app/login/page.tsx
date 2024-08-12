@@ -30,7 +30,7 @@ export default async function LoginForm() {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <form action={dispatch}>
+      <form onSubmit={() => alert("Please log in with Google for this demo")}>
         <Card className="mx-auto max-w-sm">
           <CardHeader>
             <CardTitle className="text-2xl">Login</CardTitle>

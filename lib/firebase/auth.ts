@@ -42,41 +42,45 @@ export async function signInWithEmailAndPassword(
   prevState: {error: boolean; message: string} | undefined,
   formData: FormData
 ) {
-  try {
-    const loginFields = AuthSchema.safeParse({
-      email: formData.get("email"),
-      password: formData.get("password"),
-    });
-    if (!loginFields.success) {
-      return {
-        error: true,
-        message: "Invalid credentials. Please try again.",
-      };
-    }
-    const {email, password} = loginFields.data;
-    const result = await _signInWithEmailAndPassword(auth, email, password);
+  return {
+    error: true,
+    message: "Use Google sign in for this demo",
+  };
+  // try {
+  //   const loginFields = AuthSchema.safeParse({
+  //     email: formData.get("email"),
+  //     password: formData.get("password"),
+  //   });
+  //   if (!loginFields.success) {
+  //     return {
+  //       error: true,
+  //       message: "Invalid credentials. Please try again.",
+  //     };
+  //   }
+  //   const {email, password} = loginFields.data;
+  //   const result = await _signInWithEmailAndPassword(auth, email, password);
 
-    if (!result || !result.user) {
-      throw new Error("Email and password sign in failed");
-    }
-    if (!result.user.emailVerified) {
-      await sendEmailVerification(result.user);
-      await auth.signOut();
-      return {
-        error: true,
-        message:
-          "Email is not verified. Please verify your email and try again.",
-      };
-    }
-    await createSession(result.user.uid);
-    setCookie(SESSION_COOKIE_NAME, result.user.uid);
-    return {
-      error: false,
-      message: "Login successful",
-    };
-  } catch (error) {
-    console.error("Error signing in with email and password", error);
-  }
+  //   if (!result || !result.user) {
+  //     throw new Error("Email and password sign in failed");
+  //   }
+  //   if (!result.user.emailVerified) {
+  //     await sendEmailVerification(result.user);
+  //     await auth.signOut();
+  //     return {
+  //       error: true,
+  //       message:
+  //         "Email is not verified. Please verify your email and try again.",
+  //     };
+  //   }
+  //   await createSession(result.user.uid);
+  //   setCookie(SESSION_COOKIE_NAME, result.user.uid);
+  //   return {
+  //     error: false,
+  //     message: "Login successful",
+  //   };
+  // } catch (error) {
+  //   console.error("Error signing in with email and password", error);
+  // }
 }
 
 export async function signOut() {
@@ -91,32 +95,36 @@ export async function createUserWithEmail(
   prevState: {error: boolean; message: string} | undefined,
   formData: FormData
 ) {
-  try {
-    const signUpFields = AuthSchema.safeParse({
-      email: formData.get("email"),
-      password: formData.get("password"),
-    });
-    if (!signUpFields.success) {
-      return {
-        error: true,
-        message: "Invalid credentials. Please try again.",
-      };
-    }
-    const {email, password} = signUpFields.data;
-    const result = await createUserWithEmailAndPassword(auth, email, password);
+  return {
+    error: true,
+    message: "Use Google sign in for this demo",
+  };
+  // try {
+  //   const signUpFields = AuthSchema.safeParse({
+  //     email: formData.get("email"),
+  //     password: formData.get("password"),
+  //   });
+  //   if (!signUpFields.success) {
+  //     return {
+  //       error: true,
+  //       message: "Invalid credentials. Please try again.",
+  //     };
+  //   }
+  //   const {email, password} = signUpFields.data;
+  //   const result = await createUserWithEmailAndPassword(auth, email, password);
 
-    if (!result || !result.user) {
-      return {
-        error: true,
-        message: "Create user with email and password failed",
-      };
-    }
-    await sendEmailVerification(result.user);
-    return {
-      error: false,
-      message: "Email verification sent",
-    };
-  } catch (error) {
-    console.error("Error creating user with email and password", error);
-  }
+  //   if (!result || !result.user) {
+  //     return {
+  //       error: true,
+  //       message: "Create user with email and password failed",
+  //     };
+  //   }
+  //   await sendEmailVerification(result.user);
+  //   return {
+  //     error: false,
+  //     message: "Email verification sent",
+  //   };
+  // } catch (error) {
+  //   console.error("Error creating user with email and password", error);
+  // }
 }
