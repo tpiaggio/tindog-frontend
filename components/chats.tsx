@@ -17,12 +17,16 @@ import {
   where,
 } from "firebase/firestore";
 import {db} from "@/lib/firebase/config";
+import {SESSION_COOKIE_NAME} from "@/constants";
+import {getCookie} from "cookies-next";
 
-const Chats = ({session}: {session: string}) => {
+const Chats = ({session}: {session: string | undefined}) => {
   const currentDog = useAtomValue(dogAtom);
-  const userSessionId = useUserSession(session);
   const [chats, setChats] = useState<Chat[]>([]);
   const [isLoading, setLoading] = useState(true);
+
+  const initSession = session || getCookie(SESSION_COOKIE_NAME) || null;
+  const userSessionId = useUserSession(initSession);
 
   useEffect(() => {
     const q = query(

@@ -28,8 +28,10 @@ import {
 } from "@/components/ui/dialog";
 import {matchDogs} from "@/lib/firebase/functions";
 import {Loader2} from "lucide-react";
+import {SESSION_COOKIE_NAME} from "@/constants";
+import {getCookie} from "cookies-next";
 
-const Cards = ({session}: {session: string}) => {
+const Cards = ({session}: {session: string | undefined}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lastDirection, setLastDirection] = useState("");
   const [matchedDog, setMatchedDog] = useState<Dog | null>(null);
@@ -41,10 +43,12 @@ const Cards = ({session}: {session: string}) => {
   const currentDog = useAtomValue(dogAtom);
   const [dogs, setDogs] = useState<Dog[]>([]);
   const [isLoading, setLoading] = useState(true);
-  const userSessionId = useUserSession(session);
+
+  const initSession = session || getCookie(SESSION_COOKIE_NAME) || null;
+  const userSessionId = useUserSession(initSession);
 
   useEffect(() => {
-    if (!currentDog.id) return;
+    if (!currentDog.id || !userSessionId) return;
     getDogs(userSessionId, currentDog.seen).then((data) => {
       if (data) {
         setDogs(data);

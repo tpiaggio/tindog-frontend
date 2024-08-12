@@ -9,12 +9,16 @@ import useUserSession from "@/hooks/useUserSession";
 import DogForm from "./dog-form";
 import {getCurrentDog} from "@/lib/firebase/firestore";
 import {RESET} from "jotai/utils";
+import {SESSION_COOKIE_NAME} from "@/constants";
+import {getCookie} from "cookies-next";
 
-const Onboarding = ({session}: {session: string}) => {
+const Onboarding = ({session}: {session: string | undefined}) => {
   const [dog, setDog] = useAtom(dogAtom);
   const [draftDog, setDraftDog] = useAtom(dogDraftAtom);
   const [isLoading, setLoading] = useState(true);
-  const userSessionId = useUserSession(session);
+
+  const initSession = session || getCookie(SESSION_COOKIE_NAME) || null;
+  const userSessionId = useUserSession(initSession);
 
   useEffect(() => {
     getCurrentDog(userSessionId)

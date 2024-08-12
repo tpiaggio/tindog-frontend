@@ -7,7 +7,6 @@ import Navbar from "@/components/navbar";
 export default async function Home() {
   const session = cookies().get(SESSION_COOKIE_NAME)?.value;
 
-  if (!session) return <p>Loading...</p>;
   return (
     <>
       <Navbar />

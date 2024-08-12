@@ -16,6 +16,8 @@ const AuthSchema = z.object({
 
 import {auth} from "./config";
 import {createSession} from "@/actions/auth";
+import {setCookie} from "cookies-next";
+import {SESSION_COOKIE_NAME} from "@/constants";
 
 export function onAuthStateChanged(callback: (authUser: User | null) => void) {
   return _onAuthStateChanged(auth, callback);
@@ -67,6 +69,7 @@ export async function signInWithEmailAndPassword(
       };
     }
     await createSession(result.user.uid);
+    setCookie(SESSION_COOKIE_NAME, result.user.uid);
     return {
       error: false,
       message: "Login successful",

@@ -5,7 +5,6 @@ import {cookies} from "next/headers";
 export default function Chat() {
   const session = cookies().get(SESSION_COOKIE_NAME)?.value;
 
-  if (!session) return <p>Loading...</p>;
   return (
     <div className="flex flex-col h-[calc(100vh-4rem)]">
       <header className="py-4 px-6 flex items-center justify-between">

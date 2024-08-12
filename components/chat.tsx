@@ -24,20 +24,24 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import {db} from "@/lib/firebase/config";
+import {SESSION_COOKIE_NAME} from "@/constants";
+import {getCookie} from "cookies-next";
 
 export default function Component({
   session,
   id,
 }: {
-  session: string;
+  session: string | undefined;
   id: string;
 }) {
   const [message, setMessage] = useState("");
   const [isLoading, setLoading] = useState(true);
   const currentDog = useAtomValue(dogAtom);
-  const userSessionId = useUserSession(session);
   const [chat, setChat] = useState<Chat | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
+
+  const initSession = session || getCookie(SESSION_COOKIE_NAME) || null;
+  const userSessionId = useUserSession(initSession);
 
   useEffect(() => {
     getChat(id).then((data) => {
