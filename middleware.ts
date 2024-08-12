@@ -13,6 +13,7 @@ const unprotectedRoutes = [LOGIN_ROUTE, SIGN_UP_ROUTE];
 export default function middleware(request: NextRequest) {
   const session =
     request.cookies.get(SESSION_COOKIE_NAME)?.value ||
+    request.headers.get(SESSION_COOKIE_NAME) ||
     getCookie(SESSION_COOKIE_NAME) ||
     "";
 

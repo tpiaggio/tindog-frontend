@@ -38,6 +38,7 @@ async function fetchWithFirebaseHeaders(request) {
   ]);
   headers.append("Firebase-Instance-ID-Token", installationToken);
   if (authIdToken) headers.append("Authorization", `Bearer ${authIdToken}`);
+  if (auth.currentUser) headers.append("user_session", auth.currentUser.uid);
   const newRequest = new Request(request, {headers});
   return await fetch(newRequest);
 }
