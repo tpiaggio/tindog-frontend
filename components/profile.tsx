@@ -93,7 +93,7 @@ export default function Profile() {
             <div className="flex items-center justify-center">
               <div className="relative w-40 h-40 rounded-full overflow-hidden">
                 <img
-                  src={getImageUrl(currentDog.filePath)}
+                  src={getImageUrl(currentDog.id)}
                   alt="Pet image preview"
                   width={200}
                   height={200}

@@ -4,11 +4,17 @@ import {signOut} from "@/lib/firebase/auth";
 import {removeSession} from "@/actions/auth";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import {useSetAtom} from "jotai";
+import {dogAtom} from "@/atoms/dogAtom";
+import {RESET} from "jotai/utils";
 
 export default function Navbar() {
+  const setDog = useSetAtom(dogAtom);
+
   const handleSignOut = async () => {
     await signOut();
     await removeSession();
+    setDog(RESET);
   };
 
   return (

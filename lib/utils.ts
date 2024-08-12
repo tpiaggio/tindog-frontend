@@ -6,15 +6,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const getImageUrl = (filePath: string | undefined) => {
-  if (!filePath) {
+export const getImageUrl = (dogId: string | undefined) => {
+  if (!dogId) {
     return "";
   }
   const domain =
     window.location.hostname === "localhost"
       ? "http://localhost:9199"
       : "https://storage.googleapis.com";
-  return `${domain}/${process.env.NEXT_PUBLIC_STORAGE_BUCKET}/${filePath}`;
+  return `${domain}/${process.env.NEXT_PUBLIC_STORAGE_BUCKET}/dogs/${dogId}`;
 };
 
 export const getThumbnailUrl = (dogId: string) => {

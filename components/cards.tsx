@@ -184,7 +184,7 @@ const Cards = ({session}: {session: string}) => {
               <Card className="h-[480px]">
                 <CardContent className="flex flex-col items-center justify-center h-full">
                   <img
-                    src={getImageUrl(dog.filePath)}
+                    src={getImageUrl(dog.id)}
                     alt={dog.name}
                     className="w-full h-40 object-cover"
                   />
@@ -246,7 +246,7 @@ const Cards = ({session}: {session: string}) => {
               <div className="flex items-center justify-center">
                 <div className="relative w-40 h-40 rounded-full overflow-hidden">
                   <img
-                    src={getImageUrl(currentDog.filePath)}
+                    src={getImageUrl(currentDog.id)}
                     alt="Current Dog image"
                     width={200}
                     height={200}
@@ -265,7 +265,7 @@ const Cards = ({session}: {session: string}) => {
               <div className="flex items-center justify-center">
                 <div className="relative w-40 h-40 rounded-full overflow-hidden">
                   <img
-                    src={getImageUrl(matchedDog?.filePath)}
+                    src={getImageUrl(matchedDog?.id)}
                     alt="Matched Dog image"
                     width={200}
                     height={200}
