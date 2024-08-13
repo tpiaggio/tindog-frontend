@@ -1,6 +1,7 @@
 "use client";
 
 import React, {useEffect, useMemo, useRef, useState} from "react";
+import {useRouter} from "next/navigation";
 import TinderCard from "react-tinder-card";
 import {
   dislikeDog,
@@ -51,6 +52,7 @@ const Cards = ({session}: {session: string | undefined}) => {
   const currentDog = useAtomValue(dogAtom);
   const [dogs, setDogs] = useState<Dog[]>([]);
   const [isLoading, setLoading] = useState(true);
+  const {push} = useRouter();
 
   const initSession = session || getCookie(SESSION_COOKIE_NAME) || null;
   const userSessionId = useUserSession(initSession);
@@ -144,6 +146,12 @@ const Cards = ({session}: {session: string | undefined}) => {
     setLastSwipedId(swipedDog.id);
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
+  };
+
+  const goToChat = () => {
+    if (chatId) {
+      push(`/chat/${chatId}`);
+    }
   };
 
   const outOfFrame = (name: string, idx: number) => {
@@ -321,7 +329,7 @@ const Cards = ({session}: {session: string | undefined}) => {
                 Close
               </Button>
             </DialogClose>
-            <Button disabled={matchLoading} type="button">
+            <Button disabled={matchLoading} onClick={goToChat} type="button">
               {matchLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
