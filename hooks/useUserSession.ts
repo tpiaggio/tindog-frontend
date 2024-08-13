@@ -15,7 +15,8 @@ export default function useUserSession(InitSession: string | null) {
   // The service worker is built with npm run build-service-worker
   useEffect(() => {
     if (
-      window.location.hostname !== "localhost" &&
+      window.location.hostname ===
+        "tindog--tindog-4edd4.us-central1.hosted.app" &&
       "serviceWorker" in navigator
     ) {
       const serializedFirebaseConfig = encodeURIComponent(
